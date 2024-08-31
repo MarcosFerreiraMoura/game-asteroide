@@ -75,7 +75,8 @@ while loop:
     #draw
     tela.fill("black")
     x -= 0.3
-    tela.blit(img,(x, 0))
+    for i in range(2):
+        tela.blit(img,(x + largura * i, 0))
     objectGroup.draw(tela)
     fumacaGroup.draw(tela)
 
