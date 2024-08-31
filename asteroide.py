@@ -23,7 +23,7 @@ pygame.mixer.music.load("dados\Space Atmosphere.mp3")
 pygame.mixer.music.play(-1)
 
 #efeitos sonoros
-tiro = pygame.mixer.Sound("Asteroide\dados\plane_imagem\Fire 1.mp3")
+tiro = pygame.mixer.Sound("dados\plane_imagem\Fire 1.mp3")
 
 objectGroup = pygame.sprite.Group()
 inimigoGroup = pygame.sprite.Group()
