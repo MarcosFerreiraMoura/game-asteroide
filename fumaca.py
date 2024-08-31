@@ -14,10 +14,9 @@ class FumacaWhite (pygame.sprite.Sprite):
       #self.image = pygame.Surface(4,4)
       
       self.image = pygame.image.load('fumaca.png').convert_alpha()
-      self.image = pygame.transform.scale(self.image, (100,100))
-      self.image = escala(self.image, 0.3)
-      self.escala = 0.3
-      self.rect = self.image.get_rect(topleft = posicao)
+      self.image = escala(self.image, 0.01)
+      self.escala = 0.1
+      self.rect = self.image.get_rect(center = posicao)
 
       """
       caso o  self.image nao preencha
@@ -27,20 +26,24 @@ class FumacaWhite (pygame.sprite.Sprite):
       """
       self.alpha = 255
       #define a direção da particula
-      self.dir_x = 1#random.uniform(-1, 1)
-      self.dir_y = 1#random.uniform(-1, 1)
+      self.dir_x = -1#random.uniform(-1, 1)
+      self.dir_y = 0#random.uniform(-1, 1)
 
-   def update(self):
+   def update(self, *args):
          
-         self.rect.x += self.dir_x
-         self.rect.x += self.dir_y
-         self.alpha -= 5
-         self.image = escala(self.image, self.escala)
-         self.escala *= 1.1
-         if self.alpha <= 0:
-            self.kill()
-         else:
-             self.image.set_alpha(self.alpha)
+      self.rect.x += self.dir_x
+      self.rect.x += self.dir_y
+      self.alpha -= 10
+      
+      self.image = escala(self.image, self.escala)
+      self.escala += 0.05
+      if self.escala > 0.6:
+         self.escala = 0.6
+      
+      if self.alpha <= 0:
+         self.kill()
+      else:
+            self.image.set_alpha(self.alpha)
          
        
 

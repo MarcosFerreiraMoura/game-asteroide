@@ -53,7 +53,6 @@ while loop:
     if not gameover:
         
         objectGroup.update()
-        # fumacaGroup.update()
         timer += 1
         if timer > 60:
             timer = 0
@@ -74,9 +73,16 @@ while loop:
     
     #draw
     tela.fill("black")
-    x -= 0.3
+    
+    if -x >= largura:
+        x += largura
+    x -= 0.25
     for i in range(2):
-        tela.blit(img,(x + largura * i, 0))
+        if i % 2:
+            img_atualizada = pygame.transform.flip(img, True, False)
+        else:
+            img_atualizada = img
+        tela.blit(img_atualizada,(x + largura * i, 0))
     objectGroup.draw(tela)
     fumacaGroup.draw(tela)
 
