@@ -14,7 +14,7 @@ altura = 600
 tela  =  pygame.display.set_mode((largura, altura))
 
 #definindo fundo
-background = pygame.image.load('Asteroide\dados\/background\Space-Background-4.jpg').convert()
+background = pygame.image.load('dados\/background\Space-Background-4.jpg').convert()
 img = pygame.transform.scale(background, (largura, altura))
 pygame.display.set_caption("Batalha no Espaço")
 
@@ -75,7 +75,8 @@ while loop:
     #draw
     tela.fill("black")
     x -= 0.3
-    tela.blit(img,(x, 0))
+    for i in range(2):
+        tela.blit(img,(x + largura * i, 0))
     objectGroup.draw(tela)
     fumacaGroup.draw(tela)
 

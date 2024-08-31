@@ -15,9 +15,9 @@ class FumacaWhite (pygame.sprite.Sprite):
       
       self.image = pygame.image.load('fumaca.png').convert_alpha()
       self.image = pygame.transform.scale(self.image, (100,100))
-      self.image = escala(self.image, 0.1)
+      self.image = escala(self.image, 0.3)
+      self.escala = 0.3
       self.rect = self.image.get_rect(topleft = posicao)
-
 
       """
       caso o  self.image nao preencha
@@ -35,6 +35,8 @@ class FumacaWhite (pygame.sprite.Sprite):
          self.rect.x += self.dir_x
          self.rect.x += self.dir_y
          self.alpha -= 5
+         self.image = escala(self.image, self.escala)
+         self.escala *= 1.1
          if self.alpha <= 0:
             self.kill()
          else:
