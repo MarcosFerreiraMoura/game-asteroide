@@ -48,7 +48,7 @@ while loop:
             if evento.key == pygame.K_SPACE and not gameover:
                 tiro.play()
                 newTiro = Tiro(objectGroup, tiroGroup )
-                newTiro.rect.center = player.rect.center 
+                newTiro.rect.midleft = player.rect.midright
     
     if not gameover:
         

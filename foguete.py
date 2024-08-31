@@ -2,13 +2,17 @@
 import pygame
 pygame.init()
 
+def escala(img: pygame.Surface, fator):
+  w, h = img.get_width() * fator, img.get_height() * fator
+  return pygame.transform.scale(img, (int(w), int(h)))
+
 class Foguete(pygame.sprite.Sprite):
     def __init__(self, *groups):
         super().__init__(*groups)
 
         self.image  = pygame.image.load("dados/naves\po.png")
-        self.image = pygame.transform.scale(self.image, (100,100)) 
-        self.rect = pygame.Rect(50, 50, 100, 100)
+        self.image = escala(self.image, 0.6)
+        self.rect = pygame.Rect(50, 50, self.image.get_width(), self.image.get_height())
 
         self.speed = 0
         self.aceleracao = 0.1
