@@ -9,7 +9,7 @@ class Tiro(pygame.sprite.Sprite):
     def __init__(self, *groups):
         super().__init__(*groups)
 
-        self.image  = pygame.image.load("Asteroide/dados/tiroRoxo.png")
+        self.image  = pygame.image.load("dados/tiroRoxo.png")
         self.image = pygame.transform.scale(self.image, (10,10)) 
         self.rect = self.image.get_rect()
         
