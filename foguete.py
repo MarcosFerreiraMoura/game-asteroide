@@ -5,6 +5,7 @@ import math
 
 
 pygame.init()
+info = pygame.display.Info()
 
 #efeitos sonoros
 tiro = pygame.mixer.Sound("dados/audios/Fire 1.mp3")
@@ -66,8 +67,8 @@ class Foguete(pygame.sprite.Sprite):
         if self.rect.top < 0:
             self.rect.top =  0
             self.speed = 0
-        elif self.rect.bottom > 600: 
-            self.rect.bottom = 600
+        elif self.rect.bottom > info.current_h: 
+            self.rect.bottom = info.current_h
             self.speed = 0
         if self.rect.left < 0: 
             self.rect.left = 0

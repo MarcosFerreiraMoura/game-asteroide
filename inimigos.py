@@ -6,6 +6,8 @@ import foguete
 
 fumacaGroup = pygame.sprite.Group()
 
+info = pygame.display.Info()
+
 class Inimigos(pygame.sprite.Sprite):
     def __init__(self, *groups):
         super().__init__(*groups)
@@ -16,8 +18,8 @@ class Inimigos(pygame.sprite.Sprite):
         self.image = pygame.transform.scale(self.image, (100,100)) 
         self.rect = pygame.Rect(50, 50, 80, 80)
 
-        self.rect.x = 1000 + random.randint(1,500)
-        self.rect.y =random.randint(1, 400)
+        self.rect.x = info.current_w + random.randint(1,500)
+        self.rect.y = random.randint(1, info.current_h - 200)
 
         self.speed =  1+ random.random()*2
 
