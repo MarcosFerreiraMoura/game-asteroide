@@ -76,6 +76,7 @@ class InitialScreen:
 
     def start_game(self):
         # Usar subprocess para iniciar o jogo principal
+        pygame.quit()
         subprocess.Popen(["python", "main.py"])
 
 # Inicializar e rodar a tela inicial
