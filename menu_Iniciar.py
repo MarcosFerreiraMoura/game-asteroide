@@ -5,7 +5,7 @@ import sys
 
 # Inicializar o Pygame
 pygame.init()
-pygame.mixer.music.load("dados/background/StockTune-Stellar Symphony.mp3")  # Carrega o arquivo de som
+pygame.mixer.music.load("assets/menu/StockTune-Stellar Symphony.mp3")  # Carrega o arquivo de som
 pygame.mixer.music.play(-1) 
 
 # Configurações da tela
@@ -21,7 +21,7 @@ black = (0, 0, 0)
 red = (255, 0, 0)
 
 # Carregar imagem de fundo
-background = pygame.image.load("dados/background/Menu_game.PNG")
+background = pygame.image.load("assets/menu/Menu_game.png")
 background = pygame.transform.scale(background, (screen_width, screen_height))
 
 # Classe Button

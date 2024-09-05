@@ -14,12 +14,12 @@ altura = info.current_h
 tela  =  pygame.display.set_mode((largura, altura))
 
 #plano de fundo
-background = pygame.image.load('dados/imagens/background/Space-Background-4.jpg').convert()
+background = pygame.image.load('assets/background/Space-Background-4.jpg').convert()
 img = pygame.transform.scale(background, (largura, altura))
 pygame.display.set_caption("Batalha no Espaço")
 
 #musicas 
-pygame.mixer.music.load("dados/audios/Space Atmosphere.mp3")
+pygame.mixer.music.load("assets/background/Space Atmosphere.mp3")
 pygame.mixer.music.play(-1)
 
 #groups

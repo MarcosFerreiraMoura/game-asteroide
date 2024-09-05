@@ -8,7 +8,7 @@ from pygame.locals import*
 class Tiro(pygame.sprite.Sprite):
     def __init__(self, angulo, raio, posicao, *groups):
         super().__init__(*groups)
-        self.image  = pygame.image.load("dados/imagens/tiros/tiroRoxo.png")
+        self.image  = pygame.image.load("assets/tiros/tiroRoxo.png")
         self.image = pygame.transform.scale(self.image, (10,10))
         self.image = pygame.transform.rotate(self.image, angulo)
         self.rect = self.image.get_rect(midleft=posicao)

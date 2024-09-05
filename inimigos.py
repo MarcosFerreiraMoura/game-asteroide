@@ -8,14 +8,19 @@ fumacaGroup = pygame.sprite.Group()
 
 info = pygame.display.Info()
 
+def escala(img: pygame.Surface, fator):
+  w, h = img.get_width() * fator, img.get_height() * fator
+  return pygame.transform.scale(img, (int(w), int(h)))
+
 class Inimigos(pygame.sprite.Sprite):
     def __init__(self, *groups):
         super().__init__(*groups)
         self.objectGroup = groups[0]
         self.inimigoGroup = groups[1]
-
-        self.image  = pygame.image.load("dados/imagens/planetas/PinkPlanet.png")
-        self.image = pygame.transform.scale(self.image, (100,100)) 
+    
+        self.idPlaneta = random.randint(0, 9)
+        self.image  = pygame.image.load(f"assets/planetas/planet-{self.idPlaneta}.png").convert_alpha()
+        self.image = escala(self.image, 0.07)
         self.rect = pygame.Rect(50, 50, 80, 80)
 
         self.rect.x = info.current_w + random.randint(1,500)

@@ -11,7 +11,7 @@ def escala(img: pygame.Surface, fator):
 class ParticulaFogo(pygame.sprite.Sprite):
   def __init__(self, pos, offset_aleatorio, *groups):
     super().__init__(*groups)
-    self.img = pygame.image.load('dados/imagens/fogos/fogo1.png').convert_alpha()
+    self.img = pygame.image.load('assets/fogos/fogo1.png').convert_alpha()
     self.img = escala(self.img, 0.13)
     self.image = self.img
     self.rect = self.image.get_rect(center = pos)
