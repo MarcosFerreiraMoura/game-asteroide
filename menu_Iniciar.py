@@ -76,8 +76,8 @@ class InitialScreen:
 
     def start_game(self):
         # Usar subprocess para iniciar o jogo principal
-        pygame.quit()
-        subprocess.Popen(["python", "main.py"])
+        
+        subprocess.Popen(["D:/Usuarios/fabio/Área de Trabalho/computacaografica/game-asteroide/.venv/Scripts/python.exe", "main.py"])
 
 # Inicializar e rodar a tela inicial
 if __name__ == "__main__":
