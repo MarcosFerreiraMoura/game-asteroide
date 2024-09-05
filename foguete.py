@@ -8,9 +8,13 @@ pygame.init()
 info = pygame.display.Info()
 
 #efeitos sonoros
-tiro = pygame.mixer.Sound("dados/audios/Fire 1.mp3")
+tiroSound = pygame.mixer.Sound("dados/audios/Fire 1.mp3")
+tiroEspecialSound = pygame.mixer.Sound("dados/plane_imagem/Fire 5.mp3")
+tiroMenorSound = pygame.mixer.Sound("dados/plane_imagem/Fire 3.mp3")
 
 tiroGroup = pygame.sprite.Group()
+
+tiro_especial = None
 
 def escala(img: pygame.Surface, fator):
   w, h = img.get_width() * fator, img.get_height() * fator
@@ -37,7 +41,7 @@ class Foguete(pygame.sprite.Sprite):
             if not (self.timer % 10):
                 if evento.type == pygame.KEYDOWN and evento.key == pygame.K_SPACE:
                     self.timer = 0
-                    tiro.play()
+                    tiroSound.play()
                     newTiro = Tiro(self.angulo, self.raio, self.rect.center, self.objectGroup2, tiroGroup)
                 
                 elif evento.type == pygame.MOUSEBUTTONDOWN and evento.button == 1:
@@ -45,7 +49,7 @@ class Foguete(pygame.sprite.Sprite):
 
         keys  = pygame.key.get_pressed()
         if keys[pygame.K_SPACE] and not (self.timer % 10):
-            tiro.play()
+            tiroSound.play()
             newTiro = Tiro(self.angulo, self.raio, self.rect.center, self.objectGroup2, tiroGroup)
         if keys[pygame.K_a]:
             self.rect.x -= 2
