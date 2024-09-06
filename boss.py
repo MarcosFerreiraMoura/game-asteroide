@@ -2,8 +2,10 @@
 import pygame
 import random
 from tiro import Tiro
-pygame.init()
 
+
+pygame.init()
+info = pygame.display.Info()
 
 objectGroup = pygame.sprite.Group()
 tiroGroup = pygame.sprite.Group()
@@ -18,14 +20,14 @@ class naveBoss(pygame.sprite.Sprite):
 
         self.image  = pygame.image.load("dados/naves/Nave_inimiga.png")
         self.image = escala(self.image, 0.6)
-        self.rect = pygame.Rect(600, 200, self.image.get_width(), self.image.get_height())
+        self.rect = pygame.Rect(info.current_h, 200, self.image.get_width(), self.image.get_height())
         #self.rect = self.image.get_rect(midright=(800, random.randint(0, 600)))
         self.vida = 200
         self.speed = 0
         self.aceleracao = 0.1
 
-        self.rect.x = 1000 + random.randint(1,200)
-        self.rect.y =random.randint(1, 600)
+        self.rect.x = info.current_w + random.randint(1,200)
+        self.rect.y = random.randint(1, info.current_h)
 
         self.speed_x = random.uniform(2,-2)
         self.speed_y = random.uniform(2,-2)
@@ -50,13 +52,13 @@ class naveBoss(pygame.sprite.Sprite):
         if self.rect.top < 0:
             self.rect.top =  0
             self.speed = 0
-        elif self.rect.bottom > 600: 
-            self.rect.bottom = 600
+        elif self.rect.bottom > info.current_h: 
+            self.rect.bottom = info.current_h
             self.speed = 0
         if self.rect.left < 0: 
             self.rect.left = 0
-        if self.rect.right > 1000:
-            self.rect.right = 1000
+        if self.rect.right > info.current_w:
+            self.rect.right = info.current_w
 
         if self.vida <= 0:
             self.kill()

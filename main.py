@@ -3,6 +3,7 @@ import pygame
 from foguete import Foguete
 from inimigos import Inimigos
 from gameOver import GameOver
+from boss import naveBoss
 
 pygame.init()
 
@@ -10,8 +11,6 @@ pygame.init()
 info = pygame.display.Info()
 largura = info.current_w
 altura = info.current_h
-largura = 1000
-altura = 600
 
 tela  =  pygame.display.set_mode((largura, altura))
 
@@ -73,6 +72,8 @@ while loop:
             timer = 0
             if random.random() < 0.4:
                 novoInimigo = Inimigos(objectGroup2, inimigoGroup)
+            #if random.random() < 0.5:
+                #boss = naveBoss(objectGroup2, inimigoGroup)
         timer += 1
         if pygame.sprite.spritecollide(newPlayer, inimigoGroup, False, pygame.sprite.collide_mask):
             pygame.mixer.music.stop()

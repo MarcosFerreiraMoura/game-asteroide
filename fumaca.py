@@ -28,7 +28,7 @@ class FumacaWhite (pygame.sprite.Sprite):
       self.dir_x = -1#random.uniform(-1, 1)
       self.dir_y = 0#random.uniform(-1, 1)
 
-   def update(self):
+   def update(self, *args):
          
       self.rect.x += self.dir_x
       self.rect.x += self.dir_y
