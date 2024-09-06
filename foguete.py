@@ -36,17 +36,15 @@ class Foguete(pygame.sprite.Sprite):
         self.timer = 0
         
 
-    def update(self):
-        for evento in pygame.event.get():
-            if not (self.timer % 10):
-                if evento.type == pygame.KEYDOWN and evento.key == pygame.K_SPACE:
-                    self.timer = 0
-                    tiroSound.play()
-                    newTiro = Tiro(self.angulo, self.raio, self.rect.center, self.objectGroup2, tiroGroup)
-                
-                elif evento.type == pygame.MOUSEBUTTONDOWN and evento.button == 1:
-                    newTiro = Tiro(self.angulo, self.raio, self.rect.center, self.objectGroup2, tiroGroup)
-
+    def update(self, *args):
+        eventos = args[0]
+        for evento in eventos:
+            if evento.type == pygame.KEYDOWN and evento.key == pygame.K_SPACE:
+                self.timer = 0
+                tiroSound.play()
+                newTiro = Tiro(self.angulo, self.raio, self.rect.center, self.objectGroup2, tiroGroup)
+            
+        
         keys  = pygame.key.get_pressed()
         if keys[pygame.K_SPACE] and not (self.timer % 10):
             tiroSound.play()

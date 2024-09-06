@@ -21,7 +21,7 @@ class Tiro(pygame.sprite.Sprite):
         self.speed_x = speed * math.cos(angulo_radianos)
         self.speed_y = speed * math.sin(angulo_radianos)
 
-    def update(self):
+    def update(self, *args):
         self.rect.x += self.speed_x
         self.rect.y -= self.speed_y
 

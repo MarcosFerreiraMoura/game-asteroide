@@ -28,7 +28,7 @@ class Inimigos(pygame.sprite.Sprite):
 
         self.speed =  1+ random.random()*2
 
-    def update(self):
+    def update(self, *args):
 
         self.rect.x -= self.speed
 

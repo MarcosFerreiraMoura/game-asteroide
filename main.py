@@ -10,6 +10,8 @@ pygame.init()
 info = pygame.display.Info()
 largura = info.current_w
 altura = info.current_h
+largura = 1000
+altura = 600
 
 tela  =  pygame.display.set_mode((largura, altura))
 
@@ -49,7 +51,8 @@ def reiniciarGame():
     pygame.mixer.music.play(-1)
 
 while loop:
-    for evento in pygame.event.get():
+    eventos = pygame.event.get()
+    for evento in eventos:
         if evento.type == pygame.QUIT:
             pygame.quit() 
             loop = False
@@ -64,7 +67,7 @@ while loop:
     
     if not isGameOver:
         objectGroup1.update()
-        objectGroup2.update()
+        objectGroup2.update(eventos)
         
         if not timer % 60:
             timer = 0
