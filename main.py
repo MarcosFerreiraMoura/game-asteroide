@@ -50,6 +50,7 @@ def reiniciarGame():
     timer = 0
     isGameOver = False
     pygame.mixer.music.play(-1)
+    newPlayer.alive = True
 
 while loop:
     eventos = pygame.event.get()

@@ -28,8 +28,8 @@ class TiroEspecial(pygame.sprite.Sprite):
         self.speed_y = speed * math.sin(self.angulo_radianos)
         self.angulo = angulo
         self.posicao = posicao
-        
         self.explodiu = False
+        
 
     def update(self, *args):
         self.rect.x += self.speed_x
@@ -55,6 +55,10 @@ class TiroMenor(pygame.sprite.Sprite):
         self.image = pygame.image.load("assets/tiros/tiroAzul.png")
         self.image = escala(self.image, 0.5)
         self.image = pygame.transform.rotate(self.image, angulo)
+        
+        self.alpha = 255
+        self.image.set_alpha(self.alpha)
+        
         self.rect = self.image.get_rect(center=(x, y))
         self.speed_x = 6 * math.cos(angulo_radianos)
         self.speed_y = 6 * math.sin(angulo_radianos)
@@ -62,6 +66,12 @@ class TiroMenor(pygame.sprite.Sprite):
     def update(self, *args):
         self.rect.x += self.speed_x
         self.rect.y -= self.speed_y
+        
+        self.alpha -= 2
+        if self.alpha <= 0:
+            self.kill()
+        else:
+            self.image.set_alpha(self.alpha)
 
         if not (0 < self.rect.left < info.current_w) or not (0 < self.rect.top < info.current_h):
             self.kill()

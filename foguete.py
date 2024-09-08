@@ -29,7 +29,7 @@ class Foguete(pygame.sprite.Sprite):
         self.objectGroup1 = objectGroup1
         self.objectGroup2 = groups[0]
         
-        self.img  = pygame.image.load("assets/naves/po.png")
+        self.img  = pygame.image.load("assets/naves/nave1.png")
         self.img = escala(self.img, 0.6)
         self.image = self.img
         self.raio = self.image.get_width() / 2
@@ -107,3 +107,4 @@ class Foguete(pygame.sprite.Sprite):
         hits  = pygame.sprite.spritecollide(self, boss.tiroGroupBoss, True, pygame.sprite.collide_mask)
         if hits:
             self.alive = False
+            

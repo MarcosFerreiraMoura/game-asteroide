@@ -37,7 +37,7 @@ class FumacaWhite (pygame.sprite.Sprite):
       if self.alpha <= 0:
          self.kill()
       else:
-            self.image.set_alpha(self.alpha)
+         self.image.set_alpha(self.alpha)
          
        
 
