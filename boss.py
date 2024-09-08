@@ -8,7 +8,7 @@ pygame.init()
 info = pygame.display.Info()
 
 objectGroup = pygame.sprite.Group()
-tiroGroup = pygame.sprite.Group()
+tiroGroupBoss = pygame.sprite.Group()
 
 def escala(img: pygame.Surface, fator):
   w, h = img.get_width() * fator, img.get_height() * fator
@@ -17,22 +17,17 @@ def escala(img: pygame.Surface, fator):
 class naveBoss(pygame.sprite.Sprite):
     def __init__(self, *groups):
         super().__init__(*groups)
-
-        self.image  = pygame.image.load("dados/naves/Nave_inimiga.png")
+        self.objectGroup2 = groups[0]
+        self.image  = pygame.image.load("assets/naves/Nave_inimiga.png")
         self.image = escala(self.image, 0.6)
-        self.rect = pygame.Rect(info.current_h, 200, self.image.get_width(), self.image.get_height())
-        #self.rect = self.image.get_rect(midright=(800, random.randint(0, 600)))
+        #self.rect = pygame.Rect(info.current_h, 200, self.image.get_width(), self.image.get_height())
+        self.rect = self.image.get_rect(midright=(info.current_w, info.current_h/2 + random.randint(-100,100)))
         self.vida = 200
         self.speed = 0
         self.aceleracao = 0.1
 
-        self.rect.x = info.current_w + random.randint(1,200)
-        self.rect.y = random.randint(1, info.current_h)
-
         self.speed_x = random.uniform(2,-2)
         self.speed_y = random.uniform(2,-2)
-
-
 
     def update(self, *args):
 
@@ -40,15 +35,13 @@ class naveBoss(pygame.sprite.Sprite):
         self.rect.x += self.speed_x
         self.rect.y += self.speed_y
 
-        if random.random() < 1:  #chance de mudar a direção
+        if random.random() < 0.5:  #chance de mudar a direção
             self.speed_x += random.uniform(-0.5, 0.5)
             self.speed_y += random.uniform(-0.5, 0.5)
         
         # Limitando a velocidade para evitar movimentos bruscos
         self.speed_x = max(min(self.speed_x, 2), -2)
         self.speed_y = max(min(self.speed_y, 2), -2)
-
-        self.tiros_do_boss = pygame.sprite.Group()
         if self.rect.top < 0:
             self.rect.top =  0
             self.speed = 0
@@ -62,6 +55,12 @@ class naveBoss(pygame.sprite.Sprite):
 
         if self.vida <= 0:
             self.kill()
+        
+        if self.alive():
+            if random.random() < 0.01:
+                self.atirar()
+    def atirar(self):
+        tiro = Tiro(self.rect.midleft, 0, -1, self.objectGroup2, tiroGroupBoss)
 
 
     

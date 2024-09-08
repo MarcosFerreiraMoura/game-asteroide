@@ -3,6 +3,7 @@ from fogo import Fogo
 import pygame
 import math
 from tiro_especial import TiroEspecial
+import boss
 
 
 pygame.init()
@@ -24,6 +25,7 @@ def escala(img: pygame.Surface, fator):
 class Foguete(pygame.sprite.Sprite):
     def __init__(self, objectGroup1, *groups):
         super().__init__(*groups)
+        self.alive = True
         self.objectGroup1 = objectGroup1
         self.objectGroup2 = groups[0]
         
@@ -36,7 +38,6 @@ class Foguete(pygame.sprite.Sprite):
         self.angulo_rad = 0
         self.newFogo = Fogo(self.objectGroup1) #nivel1 na textura
         self.timer = 0
-        
 
     def update(self, *args):
         eventos = args[0]
@@ -69,9 +70,9 @@ class Foguete(pygame.sprite.Sprite):
         
         for evento in eventos:
             if evento.type == pygame.KEYDOWN and evento.key == pygame.K_SPACE:
-                self.timer = 0
+                self.timer = 1
                 tiroSound.play()
-                newTiro = Tiro(posicao_tiro, self.angulo, self.objectGroup2, tiroGroup)
+                newTiro = Tiro(posicao_tiro, self.angulo, 1, self.objectGroup2, tiroGroup)
             if evento.type == pygame.KEYDOWN and evento.key == pygame.K_p:
                 global tiro_especial
                 if tiro_especial and tiro_especial.alive():
@@ -86,11 +87,10 @@ class Foguete(pygame.sprite.Sprite):
                     tiroMenorSound.play()
                     tiro_especial = TiroEspecial(posicao_tiro, self.angulo, self.objectGroup1, tiroGroup)
             
-        
         keys  = pygame.key.get_pressed()
         if keys[pygame.K_SPACE] and not (self.timer % 10):
             tiroSound.play()
-            newTiro = Tiro(posicao_tiro, self.angulo, self.objectGroup2, tiroGroup)
+            newTiro = Tiro(posicao_tiro, self.angulo, 1, self.objectGroup2, tiroGroup)
         if keys[pygame.K_a]:
             self.rect.x -= 2
         elif keys[pygame.K_d]:
@@ -103,3 +103,7 @@ class Foguete(pygame.sprite.Sprite):
             self.rect.y += 2
         else:
             self.angulo = 0
+        
+        hits  = pygame.sprite.spritecollide(self, boss.tiroGroupBoss, True, pygame.sprite.collide_mask)
+        if hits:
+            self.alive = False

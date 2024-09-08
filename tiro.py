@@ -7,7 +7,7 @@ pygame.init()
 info = pygame.display.Info()
 
 class Tiro(pygame.sprite.Sprite):
-    def __init__(self, posicao, angulo, *groups):
+    def __init__(self, posicao, angulo, direcao, *groups):
         super().__init__(*groups)
         self.image  = pygame.image.load("assets/tiros/tiroRoxo.png")
         self.image = pygame.transform.scale(self.image, (10,10))
@@ -19,7 +19,7 @@ class Tiro(pygame.sprite.Sprite):
 
         angulo_radianos = math.radians(angulo)
         speed = 4
-        self.speed_x = speed * math.cos(angulo_radianos)
+        self.speed_x = speed * math.cos(angulo_radianos) * direcao
         self.speed_y = speed * math.sin(angulo_radianos)
 
     def update(self, *args):

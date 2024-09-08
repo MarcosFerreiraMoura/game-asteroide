@@ -4,6 +4,7 @@ from foguete import Foguete
 from inimigos import Inimigos
 from gameOver import GameOver
 from boss import naveBoss
+import subprocess
 
 pygame.init()
 
@@ -11,7 +12,6 @@ pygame.init()
 info = pygame.display.Info()
 largura = info.current_w
 altura = info.current_h
-
 tela  =  pygame.display.set_mode((largura, altura))
 
 #plano de fundo
@@ -33,11 +33,13 @@ gameOverGroup = pygame.sprite.Group()
 newPlayer = Foguete(objectGroup1, objectGroup2)
 gameOver = GameOver(gameOverGroup)
 
-timer = 0
+boss = None
 isGameOver = False
 loop = True
 clock  =  pygame.time.Clock()
 x = 0
+timer = 0
+isPause = False
 
 def reiniciarGame():
     global newPlayer, timer, isGameOver
@@ -60,11 +62,18 @@ while loop:
                 mouse = pygame.mouse.get_pos()
                 if gameOver.botaoMenu.rect.collidepoint(mouse):
                     loop = False
-                    #add tela de inicio dps
+                    subprocess.Popen(["D:/Usuarios/fabio/Área de Trabalho/github/fabioqueiroz1415/uni/computacaografica/game-asteroide/.venv/Scripts/python.exe", "menu_iniciar.py"])
                 elif gameOver.botaoTentarNovamente.rect.collidepoint(mouse):
                     reiniciarGame()
+        if evento.type == pygame.KEYDOWN:
+            if evento.key == pygame.K_ESCAPE:
+                isPause = not isPause
+                if isPause:
+                    pygame.mixer.music.pause()
+                else:
+                    pygame.mixer.music.unpause()
     
-    if not isGameOver:
+    if not isGameOver and not isPause and newPlayer.alive:
         objectGroup1.update()
         objectGroup2.update(eventos)
         
@@ -72,27 +81,27 @@ while loop:
             timer = 0
             if random.random() < 0.4:
                 novoInimigo = Inimigos(objectGroup2, inimigoGroup)
-            #if random.random() < 0.5:
-                #boss = naveBoss(objectGroup2, inimigoGroup)
+            if random.random() < 0.9:
+                if not (boss and boss.alive()):
+                    boss = naveBoss(objectGroup2, inimigoGroup)
         timer += 1
-        if pygame.sprite.spritecollide(newPlayer, inimigoGroup, False, pygame.sprite.collide_mask):
+        if pygame.sprite.spritecollide(newPlayer, inimigoGroup, False, pygame.sprite.collide_mask) or not newPlayer.alive:
             pygame.mixer.music.stop()
             isGameOver = True
-    else:
+
+        tela.fill("black")
+        if -x >= largura:
+            x += largura
+        x -= 0.25
+        for i in range(2):
+            if i % 2:
+                img_atualizada = pygame.transform.flip(img, True, False)
+            else:
+                img_atualizada = img
+            tela.blit(img_atualizada,(x + largura * i, 0))
+    elif isGameOver or not newPlayer.alive:
         objectGroup2.add(gameOverGroup)
     
-    #draw
-    tela.fill("black")
-    
-    if -x >= largura:
-        x += largura
-    x -= 0.25
-    for i in range(2):
-        if i % 2:
-            img_atualizada = pygame.transform.flip(img, True, False)
-        else:
-            img_atualizada = img
-        tela.blit(img_atualizada,(x + largura * i, 0))
     objectGroup1.draw(tela)
     objectGroup2.draw(tela)
 
