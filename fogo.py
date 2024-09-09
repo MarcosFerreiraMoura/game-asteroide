@@ -11,7 +11,7 @@ def escala(img: pygame.Surface, fator):
 class ParticulaFogo(pygame.sprite.Sprite):
   def __init__(self, pos, offset_aleatorio, *groups):
     super().__init__(*groups)
-    self.img = pygame.image.load('assets/fogos/fogo1.png').convert_alpha()
+    self.img = pygame.image.load('game-asteroide/assets/fogos/fogo1.png').convert_alpha()
     self.img = escala(self.img, 0.13)
     self.image = self.img
     self.rect = self.image.get_rect(center = pos)
@@ -80,6 +80,7 @@ class Fogo:
       self.direcao *= -1
       offset_aleatorio_x, offset_aleatorio_y = self.direcao * math.sin(angulo_rad), self.direcao * math.cos(angulo_rad)
       newParticulaFogo = ParticulaFogo(pos, (offset_aleatorio_x, offset_aleatorio_y), self.objectGroup1, fogoGroup)
+    
 
     if self.timer >= 60:
       self.timer = 0

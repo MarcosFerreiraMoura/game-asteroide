@@ -18,19 +18,19 @@ class GameOver():
 class imagemGameOver(pygame.sprite.Sprite):
   def __init__(self, *groups):
     super().__init__(*groups)
-    self.image = pygame.image.load('assets/gameOver/gameOver.png').convert_alpha()
+    self.image = pygame.image.load('game-asteroide/assets/gameOver/gameOver.png').convert_alpha()
     self.rect = self.image.get_rect(center = (largura//2, altura//2 - 100))
 
 class botaoTentarNovamente(pygame.sprite.Sprite):
   def __init__(self, *groups):
     super().__init__(*groups)
-    self.image = pygame.image.load('assets/gameOver/tentarNovamente.png').convert_alpha()
+    self.image = pygame.image.load('game-asteroide/assets/gameOver/tentarNovamente.png').convert_alpha()
     self.image = escala(self.image, 0.1)
     self.rect = self.image.get_rect(center = (largura//2 - 200, altura//2 + 150))
 
 class botaoMenu(pygame.sprite.Sprite):
   def __init__(self, *groups):
     super().__init__(*groups)
-    self.image = pygame.image.load('assets/gameOver/menu.png').convert_alpha()
+    self.image = pygame.image.load('game-asteroide/assets/gameOver/menu.png').convert_alpha()
     self.image = escala(self.image, 0.1)
     self.rect = self.image.get_rect(center = (largura//2 + 200, altura//2 + 150))

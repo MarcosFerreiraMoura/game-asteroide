@@ -4,13 +4,14 @@ import pygame
 import math
 
 
+
 pygame.init()
 info = pygame.display.Info()
 
 #efeitos sonoros
-tiroSound = pygame.mixer.Sound("assets/tiros/Fire 1.mp3")
-tiroEspecialSound = pygame.mixer.Sound("assets/tiros/Fire 5.mp3")
-tiroMenorSound = pygame.mixer.Sound("assets/tiros/Fire 3.mp3")
+tiroSound = pygame.mixer.Sound("game-asteroide/assets/tiros/Fire 1.mp3")
+tiroEspecialSound = pygame.mixer.Sound("game-asteroide/assets/tiros/Fire 5.mp3")
+tiroMenorSound = pygame.mixer.Sound("game-asteroide/assets/tiros/Fire 3.mp3")
 
 tiroGroup = pygame.sprite.Group()
 
@@ -26,7 +27,7 @@ class Foguete(pygame.sprite.Sprite):
         self.objectGroup1 = objectGroup1
         self.objectGroup2 = groups[0]
         
-        self.img  = pygame.image.load("assets/naves/po.png")
+        self.img  = pygame.image.load("game-asteroide/assets/naves/po.png")
         self.img = escala(self.img, 0.6)
         self.image = self.img
         self.raio = self.image.get_width() / 2
