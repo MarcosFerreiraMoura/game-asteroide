@@ -12,7 +12,7 @@ class FumacaWhite (pygame.sprite.Sprite):
       #                       tamanho em pixels(4,4)
       #self.image = pygame.Surface(4,4)
       
-      self.image = pygame.image.load('assets/fumacas/fumaca.png').convert_alpha()
+      self.image = pygame.image.load('game-asteroide/assets/fumacas/fumaca.png').convert_alpha()
       self.image = escala(self.image, 0.1)
       self.escala = 0
       self.rect = self.image.get_rect(center = posicao)

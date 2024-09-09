@@ -5,7 +5,7 @@ import math
 class TiroEspecial(pygame.sprite.Sprite):
     def __init__(self, angulo, raio, posicao, *groups):
         super().__init__(*groups)
-        self.image = pygame.image.load("assets/tiros/tiroRoxo.png")
+        self.image = pygame.image.load("game-asteroide/assets/tiros/tiroRoxo.png")
         self.image = pygame.transform.scale(self.image, (100, 100))
         self.image = pygame.transform.rotate(self.image, angulo)
         self.rect = self.image.get_rect(midleft=posicao)

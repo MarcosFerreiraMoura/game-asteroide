@@ -19,7 +19,7 @@ class Inimigos(pygame.sprite.Sprite):
         self.inimigoGroup = groups[1]
     
         self.idPlaneta = random.randint(0, 9)
-        self.image  = pygame.image.load(f"assets/planetas/planet-{self.idPlaneta}.png").convert_alpha()
+        self.image  = pygame.image.load(f"game-asteroide/assets/planetas/planet-{self.idPlaneta}.png").convert_alpha()
         self.image = escala(self.image, 0.07)
         self.rect = pygame.Rect(50, 50, 80, 80)
 
