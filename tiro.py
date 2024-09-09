@@ -3,8 +3,6 @@ import pygame
 import math
 from pygame.locals import*
 
-
-
 class Tiro(pygame.sprite.Sprite):
     def __init__(self, angulo, raio, posicao, *groups):
         super().__init__(*groups)
