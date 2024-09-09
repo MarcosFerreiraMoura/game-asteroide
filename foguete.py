@@ -25,7 +25,6 @@ def escala(img: pygame.Surface, fator):
 class Foguete(pygame.sprite.Sprite):
     def __init__(self, objectGroup1, *groups):
         super().__init__(*groups)
-        self.alive = True
         self.objectGroup1 = objectGroup1
         self.objectGroup2 = groups[0]
         
@@ -106,5 +105,8 @@ class Foguete(pygame.sprite.Sprite):
         
         hits  = pygame.sprite.spritecollide(self, boss.tiroGroupBoss, True, pygame.sprite.collide_mask)
         if hits:
-            self.alive = False
-            
+            self.kill()
+    
+    def kill(self):
+        self.newFogo.reset()
+        super().kill()
