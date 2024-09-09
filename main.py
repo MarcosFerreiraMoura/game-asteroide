@@ -3,6 +3,7 @@ import pygame
 from foguete import Foguete
 from inimigos import Inimigos
 from gameOver import GameOver
+import boss
 from boss import naveBoss
 import subprocess
 
@@ -33,7 +34,7 @@ gameOverGroup = pygame.sprite.Group()
 newPlayer = Foguete(objectGroup1, objectGroup2)
 gameOver = GameOver(gameOverGroup)
 
-boss = None
+newBoss = None
 isGameOver = False
 loop = True
 clock  =  pygame.time.Clock()
@@ -46,6 +47,7 @@ def reiniciarGame():
     objectGroup1.empty()
     objectGroup2.empty()
     inimigoGroup.empty()
+    boss.tiroGroupBoss.empty()
     newPlayer = Foguete(objectGroup1, objectGroup2)
     timer = 0
     isGameOver = False
@@ -82,9 +84,9 @@ while loop:
             timer = 0
             if random.random() < 0.4:
                 novoInimigo = Inimigos(objectGroup2, inimigoGroup)
-            if random.random() < 0.9:
-                if not (boss and boss.alive()):
-                    boss = naveBoss(objectGroup2, inimigoGroup)
+            if random.random() < 0.01:
+                if not (newBoss and newBoss.alive()):
+                    newBoss = naveBoss(objectGroup2, inimigoGroup)
         timer += 1
         if pygame.sprite.spritecollide(newPlayer, inimigoGroup, False, pygame.sprite.collide_mask) or not newPlayer.alive:
             pygame.mixer.music.stop()
