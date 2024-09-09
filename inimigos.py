@@ -17,12 +17,12 @@ class Inimigos(pygame.sprite.Sprite):
         self.objectGroup = groups[0]
         self.inimigoGroup = groups[1]
     
-        # aqui escolhe de forma aleatoria um invasor de 1 a 9
-        self.idInvasor = random.randint(1, 9)
+        # aqui escolhe de forma aleatoria um invasor de 0 a 9
+        self.idInvasor = random.randint(0, 9)
 
         # Cacarrega a imagem do invasor 
         self.image  = pygame.image.load(f"assets/invasores/invasor-{self.idInvasor}.png").convert_alpha()
-        self.image = escala(self.image, 0.07)
+        self.image = escala(self.image, 0.17)
         
         self.rect = pygame.Rect(50, 50, 80, 80)
 
@@ -37,7 +37,7 @@ class Inimigos(pygame.sprite.Sprite):
       
         self.rect.x -= self.speed
 
-        # Se o inimigo sair completamente pela esquerda, ele é removido
+        # Se o inimigo sair completamente pela esquerda ele é removido
         if self.rect.right < 0:
             self.kill()
         
