@@ -90,7 +90,7 @@ while loop:
             timer = 0
             if random.random() < 0.4:
                 novoInimigo = Inimigos(objectGroup2, inimigoGroup)
-            if random.random() < 0.01:
+            if random.random() < 0.1:
                 if not (newBoss and newBoss.alive()):
                     newBoss = naveBoss(objectGroup2, inimigoGroup)
         timer += 1
