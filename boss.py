@@ -48,8 +48,8 @@ class naveBoss(pygame.sprite.Sprite):
         elif self.rect.bottom > info.current_h: 
             self.rect.bottom = info.current_h
             self.speed = 0
-        if self.rect.left < 0: 
-            self.rect.left = 0
+        if self.rect.left < info.current_w / 2: 
+            self.rect.left = info.current_w / 2
         if self.rect.right > info.current_w:
             self.rect.right = info.current_w
 
