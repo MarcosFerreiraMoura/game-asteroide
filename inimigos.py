@@ -20,13 +20,13 @@ class Inimigos(pygame.sprite.Sprite):
     
         self.idPlaneta = random.randint(0, 9)
         self.image  = pygame.image.load(f"assets/planetas/planet-{self.idPlaneta}.png").convert_alpha()
-        self.image = escala(self.image, 0.07)
+        self.image = escala(self.image, 0.2)
         self.rect = pygame.Rect(50, 50, 80, 80)
 
         self.rect.x = info.current_w + random.randint(1,500)
         self.rect.y = random.randint(1, info.current_h - 200)
 
-        self.speed =  1+ random.random()*2
+        self.speed =  1 + random.random() * 2
 
     def update(self, *args):
 
@@ -38,5 +38,5 @@ class Inimigos(pygame.sprite.Sprite):
         hits  = pygame.sprite.groupcollide(foguete.tiroGroup, self.inimigoGroup, True, True, pygame.sprite.collide_mask)
         if hits:
             for hit in hits:
-                for i in range(1):
-                    newFumaca = FumacaWhite(hit.rect.center, self.objectGroup, fumacaGroup)
+                newFumaca = FumacaWhite(hit.rect.center, self.objectGroup, fumacaGroup)
+                    

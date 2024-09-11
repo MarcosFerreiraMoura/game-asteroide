@@ -79,8 +79,15 @@ class Fogo:
     if not self.timer % 7:
       self.direcao *= -1
       offset_aleatorio_x, offset_aleatorio_y = self.direcao * math.sin(angulo_rad), self.direcao * math.cos(angulo_rad)
-      newParticulaFogo = ParticulaFogo(pos, (offset_aleatorio_x, offset_aleatorio_y), self.objectGroup1, fogoGroup)
+      newParticulaFogo = ParticulaFogo(pos, (offset_aleatorio_x, offset_aleatorio_y), fogoGroup, self.objectGroup1)
 
     if self.timer >= 60:
       self.timer = 0
     self.timer += 1
+  
+  def reset(self):
+    self.timer = 0
+    fogoGroup.empty()
+    for particula in self.objectGroup1:
+      if isinstance(particula, ParticulaFogo):
+        particula.kill()
