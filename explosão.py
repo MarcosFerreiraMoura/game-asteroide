@@ -15,7 +15,7 @@ class ExplosaoParticulas(pygame.sprite.Sprite):
             pygame.image.load('assets/fogos/explosao0.png').convert_alpha(),
             pygame.image.load('assets/fogos/explosao.png').convert_alpha()
         ])
-        self.image_original = escala(self.image_original, random.uniform(3, 3.1))  # Reduz e randomiza o tamanho da partícula
+        self.image_original = escala(self.image_original, random.uniform(0.7, 1.2))  # Reduz e randomiza o tamanho da partícula
         self.image = self.image_original.copy()  # Cópia da imagem para manipular
         
         self.rect = self.image.get_rect(center=posicao)
