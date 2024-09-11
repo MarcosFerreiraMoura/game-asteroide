@@ -71,7 +71,7 @@ class Foguete(pygame.sprite.Sprite):
             if evento.type == pygame.KEYDOWN and evento.key == pygame.K_SPACE:
                 self.timer = 1
                 tiroSound.play()
-                newTiro = Tiro(posicao_tiro, self.angulo, 1, self.objectGroup2, tiroGroup)
+                newTiro = Tiro(posicao_tiro, self.angulo, 1, "greenTiro", self.objectGroup2, tiroGroup)
             if evento.type == pygame.KEYDOWN and evento.key == pygame.K_p:
                 global tiro_especial
                 if tiro_especial and tiro_especial.alive():
@@ -89,7 +89,7 @@ class Foguete(pygame.sprite.Sprite):
         keys  = pygame.key.get_pressed()
         if keys[pygame.K_SPACE] and not (self.timer % 10):
             tiroSound.play()
-            newTiro = Tiro(posicao_tiro, self.angulo, 1, self.objectGroup2, tiroGroup)
+            newTiro = Tiro(posicao_tiro, self.angulo, 1, "greenTiro", self.objectGroup2, tiroGroup)
         if keys[pygame.K_a]:
             self.rect.x -= 2
         elif keys[pygame.K_d]:

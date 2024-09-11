@@ -60,7 +60,6 @@ class naveBoss(pygame.sprite.Sprite):
             if random.random() < 0.01:
                 self.atirar()
     def atirar(self):
-        tiro = Tiro(self.rect.midleft, 0, -1, self.objectGroup2, tiroGroupBoss)
-
+        tiro = Tiro(self.rect.midleft, 0, -1, "redTiro", self.objectGroup2, tiroGroupBoss)
 
     
