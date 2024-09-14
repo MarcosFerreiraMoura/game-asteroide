@@ -13,8 +13,8 @@ class ExplosaoParticulas(pygame.sprite.Sprite):
         
         # Carrega a imagem da partícula
         self.image_original = random.choice([
-            pygame.image.load('game-asteroide/game-asteroide/assets/fogos/explosaofullHD.png').convert_alpha(),
-            pygame.image.load('game-asteroide/game-asteroide/assets/fogos/explosaofullHD2.png').convert_alpha(),
+            pygame.image.load('assets/fogos/explosaofullHD.png').convert_alpha(),
+            pygame.image.load('assets/fogos/explosaofullHD2.png').convert_alpha(),
         ])
         self.image_original = escala(self.image_original, random.uniform(0.7, 0.9))  # Reduz e randomiza o tamanho da partícula
         self.image = self.image_original.copy()  # Cópia da imagem para manipular
@@ -55,9 +55,10 @@ class ExplosaoParticulas(pygame.sprite.Sprite):
             self.kill()
 
 # Função para salvar os frames da explosão
-def salvar_frames(screen, grupo_explosao, numero_frames=90, diretorio="explosao_frames"):
+def salvar_frames(screen, grupo_explosao, numero_frames=90, diretorio="1"):
+    diretorio = f"assets/explosao_frames/{diretorio}"
     if not os.path.exists(diretorio):
-        os.makedirs(diretorio)  # Cria o diretório para os frames
+        os.makedirs(diretorio)  # Cria o diretório para os frames se não existir
 
     frame_num = 0
     clock = pygame.time.Clock()
@@ -74,6 +75,7 @@ def salvar_frames(screen, grupo_explosao, numero_frames=90, diretorio="explosao_
 
         grupo_explosao.update()
         grupo_explosao.draw(surface_transparente)
+        grupo_explosao.draw(screen) #inserido por fábio
 
         pygame.image.save(surface_transparente, f"{diretorio}/frame_{frame_num:03d}.png")  
         frame_num += 1
@@ -86,17 +88,19 @@ def salvar_frames(screen, grupo_explosao, numero_frames=90, diretorio="explosao_
 
         clock.tick(30)
 
-pygame.init()
-screen_width, screen_height = 1080, 720
-screen = pygame.display.set_mode((screen_width, screen_height), pygame.SRCALPHA)
+######## para teste ########
+if __name__ == "__main__":
+    pygame.init()
+    screen_width, screen_height = 1080, 720
+    screen = pygame.display.set_mode((screen_width, screen_height), pygame.SRCALPHA)
 
-grupo_explosao = pygame.sprite.Group()
+    grupo_explosao = pygame.sprite.Group()
 
+    for _ in range(50):
+        ExplosaoParticulas((screen_width//2, screen_height//2), grupo_explosao)
 
+    salvar_frames(screen, grupo_explosao, diretorio="4")
 
-for _ in range(50):
-    ExplosaoParticulas((screen_width//2, screen_height//2), grupo_explosao)
-
-salvar_frames(screen, grupo_explosao)
-
-pygame.quit()
+    pygame.quit()
+    
+######## para teste ########

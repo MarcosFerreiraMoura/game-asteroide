@@ -15,7 +15,7 @@ def escala(img: pygame.Surface, fator):
 class Inimigos(pygame.sprite.Sprite):
     def __init__(self, *groups):
         super().__init__(*groups)
-        self.objectGroup = groups[0]
+        self.objectGroup2 = groups[0]
         self.inimigoGroup = groups[1]
     
         # aqui escolhe de forma aleatoria um invasor de 0 a 9
@@ -38,9 +38,4 @@ class Inimigos(pygame.sprite.Sprite):
 
         if self.rect.right < 0:
             self.kill()
-        
-        hits  = pygame.sprite.groupcollide(foguete.tiroGroup, self.inimigoGroup, True, True, pygame.sprite.collide_mask)
-        if hits:
-            for hit in hits:
-                newFumaca = FumacaWhite(hit.rect.center, self.objectGroup, fumacaGroup)
                     

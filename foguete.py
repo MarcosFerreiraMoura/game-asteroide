@@ -102,11 +102,8 @@ class Foguete(pygame.sprite.Sprite):
             self.rect.y += 2
         else:
             self.angulo = 0
-        
-        hits  = pygame.sprite.spritecollide(self, boss.tiroGroupBoss, True, pygame.sprite.collide_mask)
-        if hits:
-            self.kill()
     
     def kill(self):
         self.newFogo.reset()
         super().kill()
+        
