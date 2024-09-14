@@ -55,8 +55,9 @@ class ExplosaoParticulas(pygame.sprite.Sprite):
             self.kill()
 
 # Função para salvar os frames da explosão
-def salvar_frames(screen, grupo_explosao, numero_frames=90, diretorio="1"):
+def salvar_frames(screen, grupo_explosao: pygame.sprite.Group, numero_frames=90, diretorio="1"):
     diretorio = f"assets/explosao_frames/{diretorio}"
+    pygame.display.set_caption(f"salvando em {diretorio}")
     if not os.path.exists(diretorio):
         os.makedirs(diretorio)  # Cria o diretório para os frames se não existir
 
@@ -77,14 +78,18 @@ def salvar_frames(screen, grupo_explosao, numero_frames=90, diretorio="1"):
         grupo_explosao.draw(surface_transparente)
         grupo_explosao.draw(screen) #inserido por fábio
 
-        pygame.image.save(surface_transparente, f"{diretorio}/frame_{frame_num:03d}.png")  
+        nome_arquivo = f"{diretorio}/frame_{frame_num:03d}.png"
+        
+        pygame.image.save(surface_transparente, nome_arquivo)
+        pygame.display.set_caption(f"salvando em {nome_arquivo}... {frame_num}/{numero_frames}")
         frame_num += 1
 
         pygame.display.flip()
 
         if frame_num >= len(grupo_explosao) and len(grupo_explosao) > 0:
             surface_transparente.fill((0, 0, 0, 0))
-            pygame.image.save(surface_transparente, f"{diretorio}/frame_{frame_num:03d}.png")
+            pygame.image.save(surface_transparente, nome_arquivo)
+            pygame.display.set_caption(f"salvando em {nome_arquivo}... {frame_num}/{numero_frames}")
 
         clock.tick(30)
 
@@ -95,11 +100,10 @@ if __name__ == "__main__":
     screen = pygame.display.set_mode((screen_width, screen_height), pygame.SRCALPHA)
 
     grupo_explosao = pygame.sprite.Group()
-
     for _ in range(50):
         ExplosaoParticulas((screen_width//2, screen_height//2), grupo_explosao)
 
-    salvar_frames(screen, grupo_explosao, diretorio="4")
+    salvar_frames(screen, grupo_explosao, diretorio="0")
 
     pygame.quit()
     

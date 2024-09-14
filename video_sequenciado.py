@@ -54,7 +54,9 @@ if __name__ == "__main__":
     clock = pygame.time.Clock()
 
     grupo_explosao = pygame.sprite.Group()
-    explosao = ExplosaoSprite((screen_width//2, screen_height//2), grupo_explosao)
+    explosao = ExplosaoSprite()
+    explosao.posicao = (screen_width//2, screen_height//2)
+    grupo_explosao.add(explosao)
 
     while grupo_explosao:
         for evento in pygame.event.get():
