@@ -6,9 +6,8 @@ from gameOver import GameOver
 import boss
 from boss import naveBoss
 import subprocess
-from video_sequenciado import ExplosaoSprite
+from explosao_video import ExplosaoSprite
 import copy
-from fumaca import FumacaWhite
 
 pygame.init()
 

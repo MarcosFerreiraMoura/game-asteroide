@@ -15,7 +15,7 @@ class ExplosaoSprite(pygame.sprite.Sprite):
         self.indice_imagem = -1
         self.tempo_ultimo_frame = pygame.time.get_ticks()
         self.rodando = True
-        pasta = f"assets/explosao_frames/{random.randint(1, 4)}" #alterado por fábio
+        pasta = f"assets/explosao_frames/{random.randint(0, 3)}" #alterado por fábio
 
         for arquivo in sorted(os.listdir(pasta)):
             if arquivo.endswith(".png"):
@@ -42,7 +42,6 @@ class ExplosaoSprite(pygame.sprite.Sprite):
                 self.rodando = False
                 self.kill()  # Remove o sprite do grupo quando a animação termina
             else:
-                print(self.indice_imagem)
                 self.image = self.imagens[self.indice_imagem]
                 self.rect = self.image.get_rect(center=self.posicao) #alterado por fabio
 

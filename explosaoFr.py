@@ -83,7 +83,7 @@ def salvar_frames(screen, grupo_explosao: pygame.sprite.Group, numero_frames=90,
         pygame.image.save(surface_transparente, nome_arquivo)
         pygame.display.set_caption(f"salvando em {nome_arquivo}... {frame_num}/{numero_frames}")
         frame_num += 1
-
+        nome_arquivo = f"{diretorio}/frame_{frame_num:03d}.png"
         pygame.display.flip()
 
         if frame_num >= len(grupo_explosao) and len(grupo_explosao) > 0:
@@ -103,7 +103,7 @@ if __name__ == "__main__":
     for _ in range(50):
         ExplosaoParticulas((screen_width//2, screen_height//2), grupo_explosao)
 
-    salvar_frames(screen, grupo_explosao, diretorio="0")
+    salvar_frames(screen, grupo_explosao, diretorio="3")
 
     pygame.quit()
     
