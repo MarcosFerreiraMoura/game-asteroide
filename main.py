@@ -11,6 +11,11 @@ import copy
 
 pygame.init()
 
+
+def escala(img: pygame.Surface, fator):
+  w, h = img.get_width() * fator, img.get_height() * fator
+  return pygame.transform.scale(img, (int(w), int(h)))
+
 # tela do jogo
 info = pygame.display.Info()
 largura = info.current_w
@@ -18,7 +23,8 @@ altura = info.current_h
 tela  =  pygame.display.set_mode((largura, altura))
 
 #plano de fundo
-background = pygame.image.load('assets/background/Space-Background-4.jpg').convert()
+background = pygame.image.load('assets/background/Space-Background-2.jpg').convert()
+
 img = pygame.transform.scale(background, (largura, altura))
 pygame.display.set_caption("Batalha no Espaço")
 
