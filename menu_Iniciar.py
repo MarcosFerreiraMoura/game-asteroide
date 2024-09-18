@@ -22,7 +22,7 @@ red = (255, 0, 0)
 
 # Carregar imagem de fundo
 background = pygame.image.load("assets/menu/Menu_game.png")
-background1 = pygame.transform.scale(background, (screen_width, screen_height))
+background = pygame.transform.scale(background, (screen_width, screen_height))
 
 # Classe Button
 class Button:
@@ -66,7 +66,7 @@ class InitialScreen:
                         self.start_game()  # Inicia o jogo principal
 
             # Desenhar o fundo
-            screen.blit(background1, (0, 0))
+            screen.blit(background, (0, 0))
 
             # Desenhar o botão "Iniciar"
             self.button.draw(screen)
@@ -76,7 +76,7 @@ class InitialScreen:
 
     def start_game(self):
         # Usar subprocess para iniciar o jogo principal
-        subprocess.Popen(["python", "main.py"])
+        subprocess.Popen(["D:/Usuarios/fabio/Área de Trabalho/github/fabioqueiroz1415/uni/computacaografica/game-asteroide/.venv/Scripts/python.exe", "main.py"])
 
 # Inicializar e rodar a tela inicial
 if __name__ == "__main__":

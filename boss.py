@@ -18,7 +18,7 @@ class naveBoss(pygame.sprite.Sprite):
     def __init__(self, *groups):
         super().__init__(*groups)
         self.objectGroup2 = groups[0]
-        self.image  = pygame.image.load("assets/naves/nave1.png")
+        self.image  = pygame.image.load("assets/naves/Nave_inimiga.png")
         self.image = escala(self.image, 0.6)
         #self.rect = pygame.Rect(info.current_h, 200, self.image.get_width(), self.image.get_height())
         self.rect = self.image.get_rect(midright=(info.current_w, info.current_h/2 + random.randint(-100,100)))
@@ -48,8 +48,8 @@ class naveBoss(pygame.sprite.Sprite):
         elif self.rect.bottom > info.current_h: 
             self.rect.bottom = info.current_h
             self.speed = 0
-        if self.rect.left < 0: 
-            self.rect.left = 0
+        if self.rect.left < info.current_w / 2: 
+            self.rect.left = info.current_w / 2
         if self.rect.right > info.current_w:
             self.rect.right = info.current_w
 
@@ -60,7 +60,6 @@ class naveBoss(pygame.sprite.Sprite):
             if random.random() < 0.01:
                 self.atirar()
     def atirar(self):
-        tiro = Tiro(self.rect.midleft, 0, -1, self.objectGroup2, tiroGroupBoss)
-
+        tiro = Tiro(self.rect.midleft, 0, -1, "redTiro", self.objectGroup2, tiroGroupBoss)
 
     

@@ -1,12 +1,13 @@
 import random
 import pygame
-from foguete import Foguete
+import foguete
 from inimigos import Inimigos
 from gameOver import GameOver
 import boss
 from boss import naveBoss
 import subprocess
-from explosão import ExplosaoParticulas
+from explosao_video import ExplosaoSprite
+import copy
 
 pygame.init()
 
@@ -32,8 +33,10 @@ explosaoGroup = pygame.sprite.Group()
 inimigoGroup = pygame.sprite.Group()
 gameOverGroup = pygame.sprite.Group()
 
+explosaoObject = ExplosaoSprite()
+
 #objetos sem groups
-newPlayer = Foguete(objectGroup1, objectGroup2)
+newPlayer = foguete.Foguete(objectGroup1, objectGroup2)
 gameOver = GameOver(gameOverGroup)
 
 #efeitos sonoros
@@ -45,7 +48,7 @@ newBoss = None
 isGameOver = False
 loop = True
 clock  =  pygame.time.Clock()
-explosao_time = None  # Inicializando explosao_time
+explosao_time = None
 x = 0
 timer = 0
 isPause = False
@@ -57,7 +60,7 @@ def reiniciarGame():
     inimigoGroup.empty()
     explosaoGroup.empty()
     boss.tiroGroupBoss.empty()
-    newPlayer = Foguete(objectGroup1, objectGroup2)
+    newPlayer = foguete.Foguete(objectGroup1, objectGroup2)
     timer = 0
     isGameOver = False
     pygame.mixer.music.play(-1)
@@ -68,13 +71,12 @@ while loop:
         if evento.type == pygame.QUIT:
             pygame.quit() 
             loop = False
-            
         if evento.type == pygame.MOUSEBUTTONDOWN and isGameOver:
             if evento.button == 1:
                 mouse = pygame.mouse.get_pos()
                 if gameOver.botaoMenu.rect.collidepoint(mouse):
                     loop = False
-                    subprocess.Popen(["python", "menu_iniciar.py"])
+                    subprocess.Popen(["D:/Usuarios/fabio/Área de Trabalho/github/fabioqueiroz1415/uni/computacaografica/game-asteroide/.venv/Scripts/python.exe", "menu_iniciar.py"])
                 elif gameOver.botaoTentarNovamente.rect.collidepoint(mouse):
                     reiniciarGame()
         if evento.type == pygame.KEYDOWN:
@@ -93,17 +95,30 @@ while loop:
             timer = 0
             if random.random() < 0.4:
                 novoInimigo = Inimigos(objectGroup2, inimigoGroup)
-            if random.random() < 0.01:
+            if random.random() < 0.1:
                 if not (newBoss and newBoss.alive()):
                     newBoss = naveBoss(objectGroup2, inimigoGroup)
         timer += 1
-        if pygame.sprite.spritecollide(newPlayer, inimigoGroup, False, pygame.sprite.collide_mask) or not newPlayer.alive():
-            
+        
+        hits = pygame.sprite.groupcollide(foguete.tiroGroup, inimigoGroup, True, True, pygame.sprite.collide_mask)
+        if hits:
+            for hit in hits:
+                explosao.play()
+                explosao_time = pygame.time.get_ticks()
+                
+                # cópia da classe já instanciada
+                video_explosao = copy.copy(explosaoObject)
+                video_explosao.posicao = hit.rect.center
+                explosaoGroup.add(video_explosao)
+                
+        if pygame.sprite.spritecollide(newPlayer, inimigoGroup, False, pygame.sprite.collide_mask) or pygame.sprite.spritecollide(newPlayer, boss.tiroGroupBoss, False, pygame.sprite.collide_mask):
             explosao.play()
             explosao_time = pygame.time.get_ticks()
-            # Criar partículas de explosão
-            for i in range(8):
-                explosao_particulas = ExplosaoParticulas(newPlayer.rect.center, explosaoGroup)
+            
+            # cópia da classe já instanciada
+            video_explosao = copy.copy(explosaoObject)
+            video_explosao.posicao = newPlayer.rect.center
+            explosaoGroup.add(video_explosao)
             newPlayer.kill()
             pygame.mixer.music.stop()
             
@@ -119,17 +134,16 @@ while loop:
                 img_atualizada = img
             tela.blit(img_atualizada,(x + largura * i, 0))
     elif isGameOver or not newPlayer.alive():
-        # Mantém a animação da explosão ativa mesmo no Game Over
-        explosaoGroup.update()
-        
         # Checa o tempo para mostrar a tela de Game Over
         if explosao_time and pygame.time.get_ticks() - explosao_time >= 2000:
             objectGroup2.add(gameOverGroup)
     
+    # Mantém a animação da explosão ativa mesmo no Game Over
+    explosaoGroup.update()
+    
     objectGroup1.draw(tela)
     explosaoGroup.draw(tela)
     objectGroup2.draw(tela)
-    
 
     pygame.display.flip()
     pygame.display.update()
